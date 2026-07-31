@@ -1,24 +1,31 @@
-# Assignment 14 – Complete BREAD Functionality for Calculations
+# Final Project - FastAPI Calculations Application
 
 ## Overview
 
-This project extends the JWT-authenticated Calculations API by implementing full BREAD (Browse, Read, Edit, Add, Delete) functionality for calculations. Users can register, log in, create calculations, view calculation history, update existing calculations, and delete calculations through both the REST API and the front-end interface.
+This project is a full-stack calculator web application built with FastAPI, SQLAlchemy, PostgreSQL, Docker, and Jinja2 templates. Users can register, log in with JWT authentication, perform calculations, and manage their calculation history.
+
+For the final project, a new **Exponentiation** calculation feature was added. Users can calculate powers (e.g., 2^3 = 8), save the result, and manage it using the application's BREAD (Browse, Read, Edit, Add, Delete) functionality.
+
+---
 
 ## Features
 
-- User registration and login with JWT authentication
-- Password hashing using bcrypt
-- Browse all calculations for the logged-in user
-- Read individual calculation details
-- Add new calculations
-- Edit existing calculations
-- Delete calculations
-- PostgreSQL database with SQLAlchemy ORM
-- Pydantic validation
-- Docker and Docker Compose support
-- Automated testing with pytest
-- GitHub Actions CI/CD pipeline
-- Docker Hub deployment
+- User Registration
+- User Login (JWT Authentication)
+- Password Hashing
+- Calculation History
+- BREAD Functionality
+  - Browse Calculations
+  - Read Calculation
+  - Add Calculation
+  - Edit Calculation
+  - Delete Calculation
+- Supported Operations
+  - Addition
+  - Subtraction
+  - Multiplication
+  - Division
+  - **Exponentiation (New Feature)**
 
 ---
 
@@ -26,115 +33,115 @@ This project extends the JWT-authenticated Calculations API by implementing full
 
 - Python 3.10
 - FastAPI
-- PostgreSQL
 - SQLAlchemy
-- Pydantic
-- JWT Authentication
-- Docker
-- Docker Compose
-- pytest
+- PostgreSQL
+- Docker & Docker Compose
+- Jinja2 Templates
+- Pytest
+- Playwright
 - GitHub Actions
 
 ---
 
-## Running the Application
+# Running the Application
 
-### Clone the repository
-
-```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
-cd YOUR_REPO
-```
-
-### Build and start the containers
+Clone the repository
 
 ```bash
-docker compose up --build
+git clone https://github.com/YOUR_USERNAME/final_project.git
+cd final_project
 ```
 
-The application will be available at:
+Build and start the containers
+
+```bash
+docker compose up --build -d
+```
+
+Open the application
 
 ```
 http://localhost:8000
 ```
 
-Swagger documentation:
+Stop the application
 
-```
-http://localhost:8000/docs
+```bash
+docker compose down
 ```
 
 ---
 
-## Running Tests
+# Running Tests
 
-Run all tests inside the Docker container:
+Run all tests
 
 ```bash
 docker compose exec web pytest --no-cov
 ```
 
-Expected result:
+Run only unit tests
 
-```
-99 passed, 1 skipped
-```
-
----
-
-## Manual Testing
-
-1. Open
-
-```
-http://localhost:8000
+```bash
+docker compose exec web pytest tests/unit --no-cov
 ```
 
-2. Register a new user.
+Run only integration tests
 
-3. Log in.
-
-4. Create a calculation.
-
-5. Verify that the calculation appears in the calculation history.
-
-6. Click **View** to display the calculation details.
-
-7. Click **Edit** to modify the calculation.
-
-8. Click **Delete** to remove the calculation.
-
----
-
-## Docker Hub
-
-Docker Hub Repository:
-
+```bash
+docker compose exec web pytest tests/integration --no-cov
 ```
-https://hub.docker.com/r/YOUR_DOCKERHUB_USERNAME/assignment14
+
+Run only E2E tests
+
+```bash
+docker compose exec web pytest tests/e2e --no-cov
 ```
 
 ---
 
-## GitHub Repository
+# Docker Hub
+
+Docker Image
 
 ```
-https://github.com/YOUR_USERNAME/YOUR_REPO
+https://hub.docker.com/r/YOUR_DOCKER_USERNAME/final_project
+```
+
+Pull the image
+
+```bash
+docker pull YOUR_DOCKER_USERNAME/final_project:latest
+```
+
+Run the image
+
+```bash
+docker run -p 8000:8000 YOUR_DOCKER_USERNAME/final_project:latest
 ```
 
 ---
 
-## Project Structure
+# GitHub Repository
+
+```
+https://github.com/YOUR_USERNAME/final_project
+```
+
+---
+
+# Project Structure
 
 ```
 app/
 ├── auth/
 ├── core/
 ├── models/
+├── operations/
 ├── schemas/
 ├── templates/
 ├── static/
-├── main.py
+└── main.py
 
 tests/
 ├── unit/
@@ -144,25 +151,32 @@ tests/
 
 ---
 
-## BREAD Operations
+# Testing Summary
 
-| Operation | Endpoint |
-|-----------|----------|
-| Browse | GET /calculations |
-| Read | GET /calculations/{id} |
-| Add | POST /calculations |
-| Edit | PUT /calculations/{id} |
-| Delete | DELETE /calculations/{id} |
+The application includes:
+
+- Unit tests for calculation logic
+- Integration tests for API endpoints and database interactions
+- End-to-End tests for authentication and application workflows
+- GitHub Actions CI pipeline for automated testing
 
 ---
 
-## CI/CD
+# Final Project Feature
 
-GitHub Actions automatically:
+The new feature implemented for the final project is **Exponentiation**.
 
-- Runs pytest
-- Builds the Docker image
-- Pushes the image to Docker Hub after all tests pass
+Users can:
+
+- Select Exponentiation from the calculator.
+- Enter two numbers.
+- Calculate powers (example: 2^3 = 8).
+- Save the calculation.
+- View saved calculations.
+- Edit calculations.
+- Delete calculations.
+
+The feature is integrated with the existing authentication system, database, user interface, and automated tests.
 
 ---
 
@@ -173,6 +187,5 @@ Melvina Temu
 Business Information Systems
 
 New Jersey Institute of Technology
-
 ## Docker link
-https://hub.docker.com/repository/docker/lilmel/601_module14/general 
+https://hub.docker.com/repository/docker/lilmel/final_project/general 

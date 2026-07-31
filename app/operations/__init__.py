@@ -12,6 +12,7 @@ Functions:
 - subtract(a: Union[int, float], b: Union[int, float]) -> Union[int, float]: Returns the difference when b is subtracted from a.
 - multiply(a: Union[int, float], b: Union[int, float]) -> Union[int, float]: Returns the product of a and b.
 - divide(a: Union[int, float], b: Union[int, float]) -> float: Returns the quotient when a is divided by b. Raises ValueError if b is zero.
+- exponentiate(a: Union[int, float], b: Union[int, float]) -> Union[int, float]: Returns a raised to the power of b.
 
 Usage:
 These functions can be imported and used in other modules or integrated into APIs
@@ -117,4 +118,25 @@ def divide(a: Number, b: Number) -> float:
     
     # Perform division of a by b and return the result as a float
     result = a / b
+    return result
+
+def exponentiate(a: Number, b: Number) -> Number:
+    """
+    Raise the first number to the power of the second and return the result.
+
+    Parameters:
+    - a (int or float): The base.
+    - b (int or float): The exponent.
+
+    Returns:
+    - int or float: The result of a raised to the power of b.
+
+    Example:
+    >>> exponentiate(2, 3)
+    8
+    >>> exponentiate(2.0, 0.5)
+    1.4142135623730951
+    """
+    # Perform exponentiation of a by b
+    result = a ** b
     return result

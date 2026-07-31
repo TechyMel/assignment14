@@ -1,264 +1,178 @@
-# 📦 Project Setup
+# Assignment 14 – Complete BREAD Functionality for Calculations
+
+## Overview
+
+This project extends the JWT-authenticated Calculations API by implementing full BREAD (Browse, Read, Edit, Add, Delete) functionality for calculations. Users can register, log in, create calculations, view calculation history, update existing calculations, and delete calculations through both the REST API and the front-end interface.
+
+## Features
+
+- User registration and login with JWT authentication
+- Password hashing using bcrypt
+- Browse all calculations for the logged-in user
+- Read individual calculation details
+- Add new calculations
+- Edit existing calculations
+- Delete calculations
+- PostgreSQL database with SQLAlchemy ORM
+- Pydantic validation
+- Docker and Docker Compose support
+- Automated testing with pytest
+- GitHub Actions CI/CD pipeline
+- Docker Hub deployment
 
 ---
 
-# 🧩 1. Install Homebrew (Mac Only)
+## Technologies Used
 
-> Skip this step if you're on Windows.
-
-Homebrew is a package manager for macOS.  
-You’ll use it to easily install Git, Python, Docker, etc.
-
-**Install Homebrew:**
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-**Verify Homebrew:**
-
-```bash
-brew --version
-```
-
-If you see a version number, you're good to go.
+- Python 3.10
+- FastAPI
+- PostgreSQL
+- SQLAlchemy
+- Pydantic
+- JWT Authentication
+- Docker
+- Docker Compose
+- pytest
+- GitHub Actions
 
 ---
 
-# 🧩 2. Install and Configure Git
+## Running the Application
 
-## Install Git
-
-- **MacOS (using Homebrew)**
+### Clone the repository
 
 ```bash
-brew install git
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
+cd YOUR_REPO
 ```
 
-- **Windows**
-
-Download and install [Git for Windows](https://git-scm.com/download/win).  
-Accept the default options during installation.
-
-**Verify Git:**
+### Build and start the containers
 
 ```bash
-git --version
+docker compose up --build
 ```
 
----
+The application will be available at:
 
-## Configure Git Globals
-
-Set your name and email so Git tracks your commits properly:
-
-```bash
-git config --global user.name "Your Name"
-git config --global user.email "your_email@example.com"
+```
+http://localhost:8000
 ```
 
-Confirm the settings:
+Swagger documentation:
 
-```bash
-git config --list
 ```
-
----
-
-## Generate SSH Keys and Connect to GitHub
-
-> Only do this once per machine.
-
-1. Generate a new SSH key:
-
-```bash
-ssh-keygen -t ed25519 -C "your_email@example.com"
-```
-
-(Press Enter at all prompts.)
-
-2. Start the SSH agent:
-
-```bash
-eval "$(ssh-agent -s)"
-```
-
-3. Add the SSH private key to the agent:
-
-```bash
-ssh-add ~/.ssh/id_ed25519
-```
-
-4. Copy your SSH public key:
-
-- **Mac/Linux:**
-
-```bash
-cat ~/.ssh/id_ed25519.pub | pbcopy
-```
-
-- **Windows (Git Bash):**
-
-```bash
-cat ~/.ssh/id_ed25519.pub | clip
-```
-
-5. Add the key to your GitHub account:
-   - Go to [GitHub SSH Settings](https://github.com/settings/keys)
-   - Click **New SSH Key**, paste the key, save.
-
-6. Test the connection:
-
-```bash
-ssh -T git@github.com
-```
-
-You should see a success message.
-
----
-
-# 🧩 3. Clone the Repository
-
-Now you can safely clone the course project:
-
-```bash
-git clone <repository-url>
-cd <repository-directory>
+http://localhost:8000/docs
 ```
 
 ---
 
-# 🛠️ 4. Install Python 3.10+
+## Running Tests
 
-## Install Python
-
-- **MacOS (Homebrew)**
+Run all tests inside the Docker container:
 
 ```bash
-brew install python
+docker compose exec web pytest --no-cov
 ```
 
-- **Windows**
+Expected result:
 
-Download and install [Python for Windows](https://www.python.org/downloads/).  
-✅ Make sure you **check the box** `Add Python to PATH` during setup.
-
-**Verify Python:**
-
-```bash
-python3 --version
 ```
-or
-```bash
-python --version
+99 passed, 1 skipped
 ```
 
 ---
 
-## Create and Activate a Virtual Environment
+## Manual Testing
 
-(Optional but recommended)
+1. Open
 
-```bash
-python3 -m venv venv
-source venv/bin/activate   # Mac/Linux
-venv\Scripts\activate.bat  # Windows
+```
+http://localhost:8000
 ```
 
-### Install Required Packages
+2. Register a new user.
 
-```bash
-pip install -r requirements.txt
+3. Log in.
+
+4. Create a calculation.
+
+5. Verify that the calculation appears in the calculation history.
+
+6. Click **View** to display the calculation details.
+
+7. Click **Edit** to modify the calculation.
+
+8. Click **Delete** to remove the calculation.
+
+---
+
+## Docker Hub
+
+Docker Hub Repository:
+
+```
+https://hub.docker.com/r/YOUR_DOCKERHUB_USERNAME/assignment14
 ```
 
 ---
 
-# 🐳 5. (Optional) Docker Setup
+## GitHub Repository
 
-> Skip if Docker isn't used in this module.
-
-## Install Docker
-
-- [Install Docker Desktop for Mac](https://www.docker.com/products/docker-desktop/)
-- [Install Docker Desktop for Windows](https://www.docker.com/products/docker-desktop/)
-
-## Build Docker Image
-
-```bash
-docker build -t <image-name> .
 ```
-
-## Run Docker Container
-
-```bash
-docker run -it --rm <image-name>
+https://github.com/YOUR_USERNAME/YOUR_REPO
 ```
 
 ---
 
-# 🚀 6. Running the Project
+## Project Structure
 
-- **Without Docker**:
+```
+app/
+├── auth/
+├── core/
+├── models/
+├── schemas/
+├── templates/
+├── static/
+├── main.py
 
-```bash
-python main.py
+tests/
+├── unit/
+├── integration/
+└── e2e/
 ```
 
-(or update this if the main script is different.)
+---
 
-- **With Docker**:
+## BREAD Operations
 
-```bash
-docker run -it --rm <image-name>
-```
+| Operation | Endpoint |
+|-----------|----------|
+| Browse | GET /calculations |
+| Read | GET /calculations/{id} |
+| Add | POST /calculations |
+| Edit | PUT /calculations/{id} |
+| Delete | DELETE /calculations/{id} |
 
 ---
 
-# 📝 7. Submission Instructions
+## CI/CD
 
-After finishing your work:
+GitHub Actions automatically:
 
-```bash
-git add .
-git commit -m "Complete Module X"
-git push origin main
-```
-
-Then submit the GitHub repository link as instructed.
+- Runs pytest
+- Builds the Docker image
+- Pushes the image to Docker Hub after all tests pass
 
 ---
 
-# 🔥 Useful Commands Cheat Sheet
+## Author
 
-| Action                         | Command                                          |
-| ------------------------------- | ------------------------------------------------ |
-| Install Homebrew (Mac)          | `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"` |
-| Install Git                     | `brew install git` or Git for Windows installer |
-| Configure Git Global Username  | `git config --global user.name "Your Name"`      |
-| Configure Git Global Email     | `git config --global user.email "you@example.com"` |
-| Clone Repository                | `git clone <repo-url>`                          |
-| Create Virtual Environment     | `python3 -m venv venv`                           |
-| Activate Virtual Environment   | `source venv/bin/activate` / `venv\Scripts\activate.bat` |
-| Install Python Packages        | `pip install -r requirements.txt`               |
-| Build Docker Image              | `docker build -t <image-name> .`                |
-| Run Docker Container            | `docker run -it --rm <image-name>`               |
-| Push Code to GitHub             | `git add . && git commit -m "message" && git push` |
+Melvina Temu
 
----
+Business Information Systems
 
-# 📋 Notes
+New Jersey Institute of Technology
 
-- Install **Homebrew** first on Mac.
-- Install and configure **Git** and **SSH** before cloning.
-- Use **Python 3.10+** and **virtual environments** for Python projects.
-- **Docker** is optional depending on the project.
-
----
-
-# 📎 Quick Links
-
-- [Homebrew](https://brew.sh/)
-- [Git Downloads](https://git-scm.com/downloads)
-- [Python Downloads](https://www.python.org/downloads/)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- [GitHub SSH Setup Guide](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)
+## Docker link
+https://hub.docker.com/repository/docker/lilmel/601_module14/general 

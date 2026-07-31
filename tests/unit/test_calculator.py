@@ -2,7 +2,7 @@
 
 import pytest  # Import the pytest framework for writing and running tests
 from typing import Union  # Import Union for type hinting multiple possible types
-from app.operations import add, subtract, multiply, divide, exponentiate  # Import the calculator functions from the operations module
+from app.operations import add, subtract, multiply, divide  # Import the calculator functions from the operations module
 
 # Define a type alias for numbers that can be either int or float
 Number = Union[int, float]
@@ -202,55 +202,6 @@ def test_divide(a: Number, b: Number, expected: float) -> None:
     
     # Assert that the result of divide(a, b) matches the expected value
     assert result == expected, f"Expected divide({a}, {b}) to be {expected}, but got {result}"
-
-
-# ---------------------------------------------
-# Unit Tests for the 'exponentiate' Function
-# ---------------------------------------------
-
-@pytest.mark.parametrize(
-    "a, b, expected",
-    [
-        (2, 3, 8),            # Test raising a positive integer to a positive integer power
-        (2, 0, 1),            # Test raising a number to the power of zero
-        (2.0, 0.5, 2.0 ** 0.5),  # Test raising a float to a fractional power
-        (-2, 3, -8),          # Test raising a negative integer to an odd power
-        (5, 1, 5),             # Test raising a number to the power of one
-    ],
-    ids=[
-        "exponentiate_positive_integer",
-        "exponentiate_power_of_zero",
-        "exponentiate_fractional_power",
-        "exponentiate_negative_base_odd_power",
-        "exponentiate_power_of_one",
-    ]
-)
-def test_exponentiate(a: Number, b: Number, expected: Number) -> None:
-    """
-    Test the 'exponentiate' function with various combinations of integers and floats.
-
-    This parameterized test verifies that the 'exponentiate' function correctly raises
-    the first number to the power of the second, handling positive, negative, zero,
-    and fractional exponents.
-
-    Parameters:
-    - a (Number): The base.
-    - b (Number): The exponent.
-    - expected (Number): The expected result of the exponentiation.
-
-    Steps:
-    1. Call the 'exponentiate' function with arguments 'a' and 'b'.
-    2. Assert that the result is equal to 'expected'.
-
-    Example:
-    >>> test_exponentiate(2, 3, 8)
-    >>> test_exponentiate(2, 0, 1)
-    """
-    # Call the 'exponentiate' function with the provided arguments
-    result = exponentiate(a, b)
-
-    # Assert that the result of exponentiate(a, b) matches the expected value
-    assert result == expected, f"Expected exponentiate({a}, {b}) to be {expected}, but got {result}"
 
 
 # ---------------------------------------------

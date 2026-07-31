@@ -44,6 +44,8 @@ from app.database import Base, get_db, engine  # Database connection
 # ------------------------------------------------------------------------------
 # Create tables on startup using the lifespan event
 # ------------------------------------------------------------------------------
+from app.models.user import User
+from app.models.calculation import Calculation
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """
